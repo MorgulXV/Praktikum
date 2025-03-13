@@ -3,7 +3,8 @@
 {
     public static void Main(string[] args)
     {
-        System.Console.WriteLine("Hello World!");
+        int a = 200;
+        System.Console.WriteLine("Hello World!" + a + "abc");
     }
 }
 
