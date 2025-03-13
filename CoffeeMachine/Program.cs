@@ -2,7 +2,12 @@
 
 namespace MyApplication
 {
-    class CoffeeMachine{
+    interface IMachine{
+        bool getIsOn();
+        bool switchOff();
+        bool switchOn();
+    }
+    class CoffeeMachine : IMachine{
         private bool isOn;
         private bool isBrewing;
         private bool hasCoffeePowder;
@@ -63,8 +68,13 @@ namespace MyApplication
                 return false;
             }
         }
-        public void switchOff(){
+        public bool switchOff(){
+            if(!(isOn)){
                 this.isOn = false;
+                return true;
+            }else{
+                return false;
+            }
         }
 
         public bool getIsOn(){
@@ -146,8 +156,11 @@ namespace MyApplication
                             }
                             break;
                         case 6:
-                            NewCoffeeMachine.switchOff();
-                            Console.WriteLine("Coffee machine switched off");
+                            if(NewCoffeeMachine.switchOff() == true){
+                                Console.WriteLine("Coffee machine switched off");
+                            }else{
+                                Console.WriteLine("Coffee machine has already been switched off");
+                            }
                             break;
                         case 7:
                             Environment.Exit(1);
