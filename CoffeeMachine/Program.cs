@@ -17,66 +17,73 @@ namespace MyApplication
             this.hasWater = false;
         }
 
-        public void brew(){
+        public bool brew(){
             if(this.isOn && this.hasCoffeePowder && this.hasWater && !(this.isBrewing) && (remainingCups == 0)){
-                System.Console.WriteLine("Started brewing");
                 this.isBrewing = true;
-                System.Threading.Thread.Sleep(5000);
                 this.isBrewing = false;
-                Console.WriteLine("Stopped brewing");
                 this.remainingCups = 5;
                 this.hasCoffeePowder = false;
                 this.hasWater = false;
-            }else if(!(this.isOn)){
-                System.Console.WriteLine("Coffee machine isn't on");
-            }else if(!(this.hasCoffeePowder)){
-                System.Console.WriteLine("No coffee powder availiable, please refill");
-            }else if(!(hasWater)){
-                Console.WriteLine("No water available, please refill");
-            }else if(remainingCups > 0){
-                System.Console.WriteLine("You have " + remainingCups + " more cups to take");
+                return true;
+            }else{
+                return false;
             }
         }
 
-        public void takeCup(){
+        public bool takeCup(){
             if(remainingCups > 0){
                 remainingCups--;
-                System.Console.WriteLine("Cup Taken");
+                return true;
             }else{
-                System.Console.WriteLine("Coffee machine empty please brew new coffee");
+                return false;
             }
         }
 
-        public void refillCoffee(){
+        public bool refillCoffee(){
             if(this.hasCoffeePowder == false){
                 this.hasCoffeePowder = true;
-                System.Console.WriteLine("Coffe powder has been refilled");
+                return true;
             }else{
-                System.Console.WriteLine("Coffee powder already has been refilled");
+                return false;
             }
         }
-        public void refillWater(){
+        public bool refillWater(){
             if(this.hasWater == false){
                 this.hasWater = true;
-                System.Console.WriteLine("Water has been refilled");
+                return true;
             }else{
-                System.Console.WriteLine("Water already has been refilled");
+                return false;
             }
         }
-        public void switchOn(){
-            if(isOn){
-                Console.WriteLine("Machine is already on");
-            }else{
+        public bool switchOn(){
+            if(!(this.isOn)){
                 this.isOn = true;
+                return true;
+            }else{
+                return false;
             }
         }
         public void switchOff(){
-            if(!isOn){
-                Console.WriteLine("Machine is already off");
-            }else{
                 this.isOn = false;
+        }
+
+        public bool getIsOn(){
+            if(this.isOn){
+                return true;
+            }else{
+                return false;
             }
         }
+        public int getRemainingCups(){
+            return this.remainingCups;
+        }
+        public bool getHasCoffeePowder(){
+            return this.hasCoffeePowder;
+        }
+
+        public bool getHasWater(){
+            return this.hasWater;
+        }    
     }
 
     class Program{
@@ -96,22 +103,51 @@ namespace MyApplication
                 if(choice !=null){
                     switch(choice){
                         case 1:
-                            NewCoffeeMachine.switchOn();
+                            if(NewCoffeeMachine.switchOn()){
+                                 Console.WriteLine("Coffee machine switched on");
+                            }else{
+                                Console.WriteLine("Coffee machine already switched on");
+                            }
                             break;
                         case 2:
-                            NewCoffeeMachine.refillWater();
+                            if(NewCoffeeMachine.refillWater()){
+                                Console.WriteLine("Water has been refilled");
+                            }else{
+                                Console.WriteLine("The water has already been refilled");
+                            }
                             break;
                         case 3:
-                            NewCoffeeMachine.refillCoffee();
+                            if(NewCoffeeMachine.refillCoffee()){
+                                Console.WriteLine("Coffee powder has been refilled");
+                            }else{
+                                Console.WriteLine("Coffee powder has already been refilled");
+                            }
                             break;
                         case 4:
-                            NewCoffeeMachine.brew();
+                            if(NewCoffeeMachine.brew()){
+                                System.Console.WriteLine("Started brewing");
+                                System.Threading.Thread.Sleep(5000);
+                                Console.WriteLine("Stopped brewing");
+                            }else if(NewCoffeeMachine.getIsOn() == false){
+                                System.Console.WriteLine("Coffee machine isn't on");
+                            }else if(NewCoffeeMachine.getHasCoffeePowder() == false){
+                                System.Console.WriteLine("No coffee powder availiable, please refill");
+                            }else if(NewCoffeeMachine.getHasWater() == false){
+                                Console.WriteLine("No water available, please refill");
+                            }else if(NewCoffeeMachine.getRemainingCups() > 0){
+                                System.Console.WriteLine("You have " + NewCoffeeMachine.getRemainingCups() + " more cups to take");
+                            }
                             break;
                         case 5:
-                            NewCoffeeMachine.takeCup();
+                            if(NewCoffeeMachine.takeCup()){
+                                Console.WriteLine("Cup has been taken");
+                            }else{
+                                Console.WriteLine("Coffee machine empty, please brew new coffee");
+                            }
                             break;
                         case 6:
                             NewCoffeeMachine.switchOff();
+                            Console.WriteLine("Coffee machine switched off");
                             break;
                         case 7:
                             Environment.Exit(1);
