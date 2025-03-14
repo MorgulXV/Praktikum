@@ -44,7 +44,7 @@ namespace CoffeeMachineWPF
             if (this.isOn && this.hasCoffeePowder && this.hasWater && !(this.isBrewing) && (remainingCups == 0))
             {
                 this.isBrewing = true;
-                Thread.Sleep(5000);
+                Thread.Sleep(10000);
                 this.isBrewing = false;
                 this.remainingCups = 5;
                 this.hasCoffeePowder = false;
@@ -123,7 +123,7 @@ namespace CoffeeMachineWPF
 
     public partial class MainWindow : Window
     {
-        CoffeeMachine NewCoffeMachine = new CoffeeMachine();
+        CoffeeMachine NewCoffeeMachine = new CoffeeMachine();
         public MainWindow()
         {
             InitializeComponent();
@@ -131,14 +131,14 @@ namespace CoffeeMachineWPF
 
         private void Power_Switch_Clicked(object sender, RoutedEventArgs e)
         {
-            if (NewCoffeMachine.getIsOn()){
-                NewCoffeMachine.switchOff();
+            if (NewCoffeeMachine.getIsOn()){
+                NewCoffeeMachine.switchOff();
                 StatusLED.Fill = new SolidColorBrush(Colors.Red);
                 Power_Switch.IsChecked = false;
             }
             else
             {
-                NewCoffeMachine.switchOn();
+                NewCoffeeMachine.switchOn();
                 StatusLED.Fill = new SolidColorBrush(Colors.LightGreen);
                 Power_Switch.IsChecked = true;
             }
@@ -147,29 +147,29 @@ namespace CoffeeMachineWPF
 
         private void Refill_Water_Button_Click_(object sender, RoutedEventArgs e)
         {
-            NewCoffeMachine.refillWater();
+            NewCoffeeMachine.refillWater();
             Water_Fill_Level.Value = 1;
         }
 
         private void Refill_Coffee_Button_Click(object sender, RoutedEventArgs e)
         {
-            NewCoffeMachine.refillCoffee();
+            NewCoffeeMachine.refillCoffee();
             Coffee_Powder_Fill_Level.Value = 1;
         }
 
         private void Take_Cup_Button_Click_(object sender, RoutedEventArgs e)
         {
-            NewCoffeMachine.takeCup();
-            Remaining_Cups_Fill_Level.Value = NewCoffeMachine.getRemainingCups();
+            NewCoffeeMachine.takeCup();
+            Remaining_Cups_Fill_Level.Value = NewCoffeeMachine.getRemainingCups();
 
         }
 
         private void Brew_Coffee_Button_Click(object sender, RoutedEventArgs e)
         {
-            NewCoffeMachine.brew();
-            Water_Fill_Level.Value = Convert.ToInt32(NewCoffeMachine.getHasCoffeePowder());
-            Coffee_Powder_Fill_Level.Value = Convert.ToInt32(NewCoffeMachine.getHasWater());
-            Remaining_Cups_Fill_Level.Value = NewCoffeMachine.getRemainingCups();
+            NewCoffeeMachine.brew();
+            Water_Fill_Level.Value = Convert.ToInt32(NewCoffeeMachine.getHasWater());
+            Coffee_Powder_Fill_Level.Value = Convert.ToInt32(NewCoffeeMachine.getHasCoffeePowder());
+            Remaining_Cups_Fill_Level.Value = NewCoffeeMachine.getRemainingCups();
         }
     }
 }
