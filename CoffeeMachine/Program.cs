@@ -105,7 +105,7 @@ namespace MyApplication
                 Console.WriteLine("1. Start coffee machine");
                 Console.WriteLine("2. Refill Water");
                 Console.WriteLine("3. Refill coffee powder");
-                Console.WriteLine("4. Brew coffe");
+                Console.WriteLine("4. Brew coffee");
                 Console.WriteLine("5. Take a cup");
                 Console.WriteLine("6. Stop machine");
                 Console.WriteLine("7. Exit");
