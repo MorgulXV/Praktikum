@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace CoffeeMachineWPF
 {
@@ -44,7 +45,7 @@ namespace CoffeeMachineWPF
             if (this.isOn && this.hasCoffeePowder && this.hasWater && !(this.isBrewing) && (remainingCups == 0))
             {
                 this.isBrewing = true;
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
                 this.isBrewing = false;
                 this.remainingCups = 5;
                 this.hasCoffeePowder = false;
@@ -135,12 +136,14 @@ namespace CoffeeMachineWPF
                 NewCoffeeMachine.switchOff();
                 StatusLED.Fill = new SolidColorBrush(Colors.Red);
                 Power_Switch.IsChecked = false;
+                ReEvaluateButtonState();
             }
             else
             {
                 NewCoffeeMachine.switchOn();
                 StatusLED.Fill = new SolidColorBrush(Colors.LightGreen);
                 Power_Switch.IsChecked = true;
+                ReEvaluateButtonState();
             }
             
         }
@@ -149,27 +152,71 @@ namespace CoffeeMachineWPF
         {
             NewCoffeeMachine.refillWater();
             Water_Fill_Level.Value = 1;
+            ReEvaluateButtonState();
         }
 
         private void Refill_Coffee_Button_Click(object sender, RoutedEventArgs e)
         {
             NewCoffeeMachine.refillCoffee();
             Coffee_Powder_Fill_Level.Value = 1;
+            ReEvaluateButtonState();
         }
 
         private void Take_Cup_Button_Click_(object sender, RoutedEventArgs e)
         {
             NewCoffeeMachine.takeCup();
             Remaining_Cups_Fill_Level.Value = NewCoffeeMachine.getRemainingCups();
+            ReEvaluateButtonState();
 
         }
 
         private void Brew_Coffee_Button_Click(object sender, RoutedEventArgs e)
         {
+            Power_Switch.IsEnabled = false;
+            Brew_Coffee_Button.IsEnabled = false;
             NewCoffeeMachine.brew();
+            Brew_Coffee_Button.IsEnabled = false;
             Water_Fill_Level.Value = Convert.ToInt32(NewCoffeeMachine.getHasWater());
             Coffee_Powder_Fill_Level.Value = Convert.ToInt32(NewCoffeeMachine.getHasCoffeePowder());
             Remaining_Cups_Fill_Level.Value = NewCoffeeMachine.getRemainingCups();
+            Power_Switch.IsEnabled = true;
+            ReEvaluateButtonState();
+        }
+        public void ReEvaluateButtonState()
+        {
+            if (NewCoffeeMachine.getHasWater())
+            {
+                Refill_Water_Button.IsEnabled = false;
+            }
+            else
+            {
+                Refill_Water_Button.IsEnabled = true;
+            }
+            if (NewCoffeeMachine.getHasCoffeePowder())
+            {
+                Refill_Coffee_Button.IsEnabled = false;
+            }
+            else
+            {
+                Refill_Coffee_Button.IsEnabled= true;
+            }
+            if (NewCoffeeMachine.getRemainingCups() > 0)
+            {
+                Take_Cup_Button.IsEnabled = true;
+            }
+            else
+            {
+                Take_Cup_Button.IsEnabled = false;
+            }
+            if (NewCoffeeMachine.getHasWater() && NewCoffeeMachine.getHasCoffeePowder() && (NewCoffeeMachine.getRemainingCups() == 0) && NewCoffeeMachine.getIsOn())
+            {
+                Brew_Coffee_Button.IsEnabled = true;
+            }
+            else
+            {
+                Brew_Coffee_Button.IsEnabled = false;
+            }
+
         }
     }
 }

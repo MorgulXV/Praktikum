@@ -8,11 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid>
-            <Button Content="Refill coffee powder" HorizontalAlignment="Left" Margin="417,133,0,0" VerticalAlignment="Top" Click="Refill_Coffee_Button_Click"/>
-            <Button Content="Refill water" HorizontalAlignment="Left" Margin="440,168,0,0" VerticalAlignment="Top" Click="Refill_Water_Button_Click_"/>
-            <Button Content="Brew coffee" HorizontalAlignment="Left" Margin="439,237,0,0" VerticalAlignment="Top" Click="Brew_Coffee_Button_Click"/>
-            <Button Content="Take a cup" HorizontalAlignment="Left" Margin="442,202,0,0" VerticalAlignment="Top" Click="Take_Cup_Button_Click_"/>
-            <RadioButton Content="Switch on/off" HorizontalAlignment="Left" Margin="213,136,0,0" VerticalAlignment="Top" IsChecked="False" Click="Power_Switch_Clicked" Name="Power_Switch"/>
+            <Button Content="Refill coffee powder" HorizontalAlignment="Left" Margin="417,133,0,0" VerticalAlignment="Top" Click="Refill_Coffee_Button_Click" IsEnabled="True" Name="Refill_Coffee_Button"/>
+            <Button Content="Refill water" HorizontalAlignment="Left" Margin="417,168,0,0" VerticalAlignment="Top" Click="Refill_Water_Button_Click_" Width="109" IsEnabled="True" Name="Refill_Water_Button"/>
+            <Button Content="Brew coffee" HorizontalAlignment="Left" Margin="417,237,0,0" VerticalAlignment="Top" Click="Brew_Coffee_Button_Click" Width="109" IsEnabled="False" Name="Brew_Coffee_Button"/>
+            <Button Content="Take a cup" HorizontalAlignment="Left" Margin="417,202,0,0" VerticalAlignment="Top" Click="Take_Cup_Button_Click_" Width="109" IsEnabled="False" Name="Take_Cup_Button"/>
+            <RadioButton Content="Switch on/off" HorizontalAlignment="Left" Margin="213,136,0,0" VerticalAlignment="Top" IsChecked="False" Click="Power_Switch_Clicked" Name="Power_Switch" IsEnabled="True"/>
             <Ellipse x:Name="StatusLED" Width="50" Height="50" 
                  HorizontalAlignment="Left" VerticalAlignment="Top"
                  Fill="Red" Stroke="Black" StrokeThickness="2" Margin="233,207,0,0"/>
