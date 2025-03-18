@@ -96,11 +96,22 @@ namespace MyApplication
         }    
     }
 
+    
+    
     class Program{
         public static void Main(string[] args){
             CoffeeMachine NewCoffeeMachine = new CoffeeMachine();
+            CoffeeMachine NewerCoffeeMachine = new CoffeeMachine();
+            Console.WriteLine(NewCoffeeMachine.Equals(NewerCoffeeMachine));
+            Console.WriteLine(NewCoffeeMachine.GetHashCode() + " " + NewerCoffeeMachine.GetHashCode());
+            Console.WriteLine(NewCoffeeMachine.Equals(NewCoffeeMachine));
+        }
+        void SwitchTester()
+        {
             int? choice;
-            while(true){
+            CoffeeMachine NewCoffeeMachine = new CoffeeMachine();
+            while (true)
+            {
                 Console.WriteLine("Choose action:");
                 Console.WriteLine("1. Start coffee machine");
                 Console.WriteLine("2. Refill Water");
@@ -109,56 +120,82 @@ namespace MyApplication
                 Console.WriteLine("5. Take a cup");
                 Console.WriteLine("6. Stop machine");
                 Console.WriteLine("7. Exit");
-                choice =  Convert.ToInt32(Console.ReadLine());
-                if(choice !=null){
-                    switch(choice){
+                choice = Convert.ToInt32(Console.ReadLine());
+                if (choice != null)
+                {
+                    switch (choice)
+                    {
                         case 1:
-                            if(NewCoffeeMachine.switchOn()){
-                                 Console.WriteLine("Coffee machine switched on");
-                            }else{
+                            if (NewCoffeeMachine.switchOn())
+                            {
+                                Console.WriteLine("Coffee machine switched on");
+                            }
+                            else
+                            {
                                 Console.WriteLine("Coffee machine already switched on");
                             }
                             break;
                         case 2:
-                            if(NewCoffeeMachine.refillWater()){
+                            if (NewCoffeeMachine.refillWater())
+                            {
                                 Console.WriteLine("Water has been refilled");
-                            }else{
+                            }
+                            else
+                            {
                                 Console.WriteLine("The water has already been refilled");
                             }
                             break;
                         case 3:
-                            if(NewCoffeeMachine.refillCoffee()){
+                            if (NewCoffeeMachine.refillCoffee())
+                            {
                                 Console.WriteLine("Coffee powder has been refilled");
-                            }else{
+                            }
+                            else
+                            {
                                 Console.WriteLine("Coffee powder has already been refilled");
                             }
                             break;
                         case 4:
-                            if(NewCoffeeMachine.brew()){
+                            if (NewCoffeeMachine.brew())
+                            {
                                 System.Console.WriteLine("Started brewing");
                                 System.Threading.Thread.Sleep(5000);
                                 Console.WriteLine("Stopped brewing");
-                            }else if(NewCoffeeMachine.getIsOn() == false){
+                            }
+                            else if (NewCoffeeMachine.getIsOn() == false)
+                            {
                                 System.Console.WriteLine("Coffee machine isn't on");
-                            }else if(NewCoffeeMachine.getHasCoffeePowder() == false){
+                            }
+                            else if (NewCoffeeMachine.getHasCoffeePowder() == false)
+                            {
                                 System.Console.WriteLine("No coffee powder availiable, please refill");
-                            }else if(NewCoffeeMachine.getHasWater() == false){
+                            }
+                            else if (NewCoffeeMachine.getHasWater() == false)
+                            {
                                 Console.WriteLine("No water available, please refill");
-                            }else if(NewCoffeeMachine.getRemainingCups() > 0){
+                            }
+                            else if (NewCoffeeMachine.getRemainingCups() > 0)
+                            {
                                 System.Console.WriteLine("You have " + NewCoffeeMachine.getRemainingCups() + " more cups to take");
                             }
                             break;
                         case 5:
-                            if(NewCoffeeMachine.takeCup()){
+                            if (NewCoffeeMachine.takeCup())
+                            {
                                 Console.WriteLine("Cup has been taken");
-                            }else{
+                            }
+                            else
+                            {
                                 Console.WriteLine("Coffee machine empty, please brew new coffee");
                             }
                             break;
                         case 6:
-                            if(NewCoffeeMachine.switchOff() == true){
+                            if (NewCoffeeMachine.switchOff() == true)
+                            {
                                 Console.WriteLine("Coffee machine switched off");
-                            }else{
+                            }
+                            else
+                            {
                                 Console.WriteLine("Coffee machine has already been switched off");
                             }
                             break;
@@ -166,7 +203,9 @@ namespace MyApplication
                             Environment.Exit(1);
                             break;
                     }
-                }else{
+                }
+                else
+                {
                     continue;
                 }
             }
