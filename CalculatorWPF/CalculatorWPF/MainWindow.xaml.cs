@@ -22,7 +22,6 @@ namespace CalculatorWPF
         public List<string> _infixExpr;
         private Stack<string> _stack;
         private decimal _result;
-        public string? DisplayText;
         private string? _tmp;
 
         public Calculator()
@@ -33,8 +32,15 @@ namespace CalculatorWPF
             this._result = 0;
             this._tmp = null;
         }
-        
-        
+        public string GetInfixExprAsString()
+        {
+            string InfixExpressionAsString = null;
+            foreach (string s in _infixExpr)
+            {
+                InfixExpressionAsString += s;
+            }
+            return InfixExpressionAsString;
+        }
         public decimal GetResult()
         {
             return this._result;
@@ -45,9 +51,12 @@ namespace CalculatorWPF
         }
         public void AddOperator(string op)
         {
-            this._infixExpr.Add(this._tmp);
-            this._infixExpr.Add(op);
-            this._tmp = "";
+            if (this._tmp != null)
+            {
+                this._infixExpr.Add(this._tmp);
+                this._infixExpr.Add(op);
+                this._tmp = "";
+            }
         }
         public void StackClear()
         {
@@ -166,59 +175,75 @@ namespace CalculatorWPF
             
         }
 
+        public void UpdateDisplay()
+        {
+            Display_Result.Text = NewCalculator.GetInfixExprAsString();
+        }
+        
         private void Button_7_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("7");
+            UpdateDisplay();
         }
 
         private void Button_8_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("8");
+            UpdateDisplay();
         }
 
         private void Button_9_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("9");
+            UpdateDisplay();
         }
 
         private void Button_4_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("4");
+            UpdateDisplay();
         }
 
         private void Button_5_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("5");
+            UpdateDisplay();
         }
 
         private void Button_6_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("6");
+            UpdateDisplay();
         }
 
         private void Button_1_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("1");
+            UpdateDisplay();
         }
 
         private void Button_2_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("2");
+            UpdateDisplay();
         }
 
         private void Button_3_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("3");
+            UpdateDisplay();
         }
 
         private void Button_0_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr("0");
+            UpdateDisplay();
         }
 
         private void Button_Comma_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddToPrefixExpr(".");
+            UpdateDisplay();
         }
 
         private void Button_Equals_Click(object sender, RoutedEventArgs e)
@@ -233,21 +258,26 @@ namespace CalculatorWPF
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddOperator("+");
+            UpdateDisplay();
         }
 
         private void Button_Subtract_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddOperator("-");
+            UpdateDisplay();
         }
 
         private void Button_Divide_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddOperator("/");
+            UpdateDisplay();
+
         }
 
         private void Button_Multiply_Click(object sender, RoutedEventArgs e)
         {
             NewCalculator.AddOperator("X");
+            UpdateDisplay();
         }
 
         private void Button_ClearAll_Click(object sender, RoutedEventArgs e)
