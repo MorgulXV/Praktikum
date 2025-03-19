@@ -1,18 +1,4 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.CodeDom;
-using System.Windows.Media.Animation;
+﻿using System.Windows;
 
 namespace CalculatorWPF
 {
@@ -21,7 +7,7 @@ namespace CalculatorWPF
         public List<string> _postfixExpr;
         public List<string> _infixExpr;
         private Stack<string> _stack;
-        private decimal _result;
+        private double _result;
         private string? _tmp;
 
         public Calculator()
@@ -34,15 +20,15 @@ namespace CalculatorWPF
         }
         public string GetInfixExprAsString()
         {
-            string InfixExpressionAsString = null;
+            string InfixExpressionAsString = "";
             foreach (string s in _infixExpr)
             {
                 InfixExpressionAsString += s;
             }
-            return InfixExpressionAsString;
+            return InfixExpressionAsString+=_tmp;
         }
-        public decimal GetResult()
-        {
+        public double GetResult()
+   {
             return this._result;
         }
         public void AddToPrefixExpr(string expr)
@@ -77,19 +63,19 @@ namespace CalculatorWPF
             this._stack = new Stack<string>();
             this._tmp = null;
         }
-        private string add(decimal a, decimal b)
+        private string add(double a, double b)
         {
             return Convert.ToString(b + a);
         }
-        private string subtract(decimal a, decimal b)
+        private string subtract(double a, double b)
         {
             return Convert.ToString(b - a); 
         }
-        private string multiply(decimal a, decimal b)
+        private string multiply(double a, double b)
         {
             return Convert.ToString(b * a);
         }
-        private string divide(decimal a, decimal b)
+        private string divide(double a, double b)
         {
             return Convert.ToString(b / a);
         }
@@ -141,17 +127,17 @@ namespace CalculatorWPF
             {
                 if (s == "+")
                 {
-                    this._stack.Push(add(Convert.ToDecimal(this._stack.Pop()), Convert.ToDecimal(this._stack.Pop())));
+                    this._stack.Push(add(Double.Parse(this._stack.Pop()), Double.Parse(this._stack.Pop())));
                 }else if(s == "-")
                 {
-                    this._stack.Push(subtract(Convert.ToDecimal(this._stack.Pop()), Convert.ToDecimal(this._stack.Pop())));
+                    this._stack.Push(subtract(Double.Parse(this._stack.Pop()), Double.Parse(this._stack.Pop())));
                 }else if (s == "/")
                 {
-                    this._stack.Push(divide(Convert.ToDecimal(this._stack.Pop()), Convert.ToDecimal(this._stack.Pop())));
+                    this._stack.Push(divide(Double.Parse(this._stack.Pop()), Double.Parse(this._stack.Pop())));
                 }
                 else if(s == "X")
                 {
-                    this._stack.Push(multiply(Convert.ToDecimal(this._stack.Pop()), Convert.ToDecimal((this._stack.Pop()))));
+                    this._stack.Push(multiply(Double.Parse(this._stack.Pop()), Double.Parse((this._stack.Pop()))));
                 }
                 else
                 {
@@ -159,7 +145,7 @@ namespace CalculatorWPF
                 }
 
             }
-            this._result = Convert.ToDecimal(this._stack.Pop());
+            this._result = Double.Parse(this._stack.Pop());
         }
 
     }
@@ -182,67 +168,78 @@ namespace CalculatorWPF
         
         private void Button_7_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("7");
             UpdateDisplay();
         }
 
         private void Button_8_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("8");
             UpdateDisplay();
         }
 
         private void Button_9_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("9");
             UpdateDisplay();
         }
 
         private void Button_4_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("4");
             UpdateDisplay();
         }
 
         private void Button_5_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("5");
             UpdateDisplay();
         }
 
         private void Button_6_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("6");
             UpdateDisplay();
         }
 
         private void Button_1_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("1");
             UpdateDisplay();
         }
 
         private void Button_2_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("2");
             UpdateDisplay();
         }
 
         private void Button_3_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("3");
             UpdateDisplay();
         }
 
         private void Button_0_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddToPrefixExpr("0");
             UpdateDisplay();
         }
 
         private void Button_Comma_Click(object sender, RoutedEventArgs e)
         {
-            NewCalculator.AddToPrefixExpr(".");
+            UpdateDisplay();
+            NewCalculator.AddToPrefixExpr(",");
             UpdateDisplay();
         }
 
@@ -257,18 +254,21 @@ namespace CalculatorWPF
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddOperator("+");
             UpdateDisplay();
         }
 
         private void Button_Subtract_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddOperator("-");
             UpdateDisplay();
         }
 
         private void Button_Divide_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddOperator("/");
             UpdateDisplay();
 
@@ -276,6 +276,7 @@ namespace CalculatorWPF
 
         private void Button_Multiply_Click(object sender, RoutedEventArgs e)
         {
+            UpdateDisplay();
             NewCalculator.AddOperator("X");
             UpdateDisplay();
         }

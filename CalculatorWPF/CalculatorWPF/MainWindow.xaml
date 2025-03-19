@@ -7,37 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="324" Width="282">
     <Grid HorizontalAlignment="Left" Width="464" Margin="10,0,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="71*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="12*"/>
-            <RowDefinition Height="56*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="273*"/>
-            <ColumnDefinition Width="121*"/>
-            <ColumnDefinition Width="70*"/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
-        <Button Content="1" HorizontalAlignment="Left" Margin="82,1,0,0" VerticalAlignment="Top" Width="21" Name="Button_1" RenderTransformOrigin="0.5,0.5" Click="Button_1_Click" Grid.Row="3" Height="20"/>
-        <Button Content="2" HorizontalAlignment="Left" Margin="107,1,0,0" VerticalAlignment="Top" Width="21" Name="Button_2" Click="Button_2_Click" Grid.Row="3" Height="20"/>
-        <Button Content="3" HorizontalAlignment="Left" Margin="133,1,0,0" VerticalAlignment="Top" Width="21" Name="Button_3" Click="Button_3_Click" Grid.Row="3" Height="20"/>
-        <Button Content="4" HorizontalAlignment="Left" Margin="82,30,0,0" VerticalAlignment="Top" Width="21" Name="Button_4" RenderTransformOrigin="-1.497,4.249" Click="Button_4_Click" Grid.Row="1" Grid.RowSpan="2" Height="20"/>
-        <Button Content="5" HorizontalAlignment="Left" Margin="107,30,0,0" VerticalAlignment="Top" Width="21" Name="Button_5" Click="Button_5_Click" Grid.Row="1" Grid.RowSpan="2" Height="20"/>
-        <Button Content="6" HorizontalAlignment="Left" Margin="133,30,0,0" VerticalAlignment="Top" Width="21" Name="Button_6" RenderTransformOrigin="0.827,2.966" Click="Button_6_Click" Grid.Row="1" Grid.RowSpan="2" Height="20"/>
-        <Button Content="7" HorizontalAlignment="Left" Margin="82,0,0,0" VerticalAlignment="Center" Width="21" Name="Button_7" RenderTransformOrigin="-1.122,3.298" Click="Button_7_Click" Grid.Row="1" Height="20"/>
-        <Button Content="8" HorizontalAlignment="Left" Margin="107,0,0,0" VerticalAlignment="Center" Width="21" Name="Button_8" Click="Button_8_Click" Grid.Row="1" Height="20"/>
-        <Button Content="9" HorizontalAlignment="Left" Margin="133,0,0,0" VerticalAlignment="Center" Width="21" Name="Button_9" Click="Button_9_Click" Grid.Row="1" Height="20"/>
-        <Button Content="0" HorizontalAlignment="Left" Margin="107,26,0,0" VerticalAlignment="Top" Width="21" Name="Button_0" Click="Button_0_Click" Grid.Row="3" Height="20"/>
-        <TextBox HorizontalAlignment="Left" Margin="82,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="98" Name="Display_Result" Height="18"/>
-        <Button Content="," HorizontalAlignment="Left" Margin="82,26,0,0" VerticalAlignment="Top" Width="21" Name="Button_Comma" Click="Button_Comma_Click" Grid.Row="3" Height="20"/>
-        <Button Content="=" HorizontalAlignment="Left" Margin="133,26,0,0" VerticalAlignment="Top" Width="21" Name="Button_Equals" Click="Button_Equals_Click" Grid.Row="3" Height="20"/>
-        <Button Content="+" HorizontalAlignment="Left" Margin="159,26,0,0" VerticalAlignment="Top" Width="21" Name="Button_Add" Height="20" Click="Button_Add_Click" Grid.Row="3"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="159,1,0,0" VerticalAlignment="Top" Width="21" Name="Button_Subtract" Click="Button_Subtract_Click" Grid.Row="3" Height="20"/>
-        <Button Content="X" HorizontalAlignment="Left" Margin="159,0,0,0" VerticalAlignment="Center" Width="21" Name="Button_Multiply" Click="Button_Multiply_Click" Grid.Row="1" Height="20"/>
-        <Button Content="/" HorizontalAlignment="Left" Margin="159,30,0,0" VerticalAlignment="Top" Width="21" Name="Button_Divide" Click="Button_Divide_Click" Grid.Row="1" Grid.RowSpan="2" Height="20"/>
-        <Button Content="AC" HorizontalAlignment="Left" Margin="82,122,0,0" VerticalAlignment="Top" Width="44" Name="Button_ClearAll" Click="Button_ClearAll_Click" Height="20"/>
-        <Button Content="^" HorizontalAlignment="Left" Margin="159,122,0,0" VerticalAlignment="Top" Width="22" Height="20"/>
+        <Button Content="1" HorizontalAlignment="Left" Margin="82,230,0,0" VerticalAlignment="Top" Width="21" Name="Button_1" RenderTransformOrigin="0.5,0.5" Click="Button_1_Click" Height="20"/>
+        <Button Content="2" HorizontalAlignment="Left" Margin="108,230,0,0" VerticalAlignment="Top" Width="21" Name="Button_2" Click="Button_2_Click" Height="20"/>
+        <Button Content="3" HorizontalAlignment="Left" Margin="134,230,0,0" VerticalAlignment="Top" Width="21" Name="Button_3" Click="Button_3_Click" Height="20"/>
+        <Button Content="4" HorizontalAlignment="Left" Margin="82,205,0,0" VerticalAlignment="Top" Width="21" Name="Button_4" RenderTransformOrigin="-1.497,4.249" Click="Button_4_Click" Height="20"/>
+        <Button Content="5" HorizontalAlignment="Left" Margin="108,205,0,0" VerticalAlignment="Top" Width="21" Name="Button_5" Click="Button_5_Click" Height="20"/>
+        <Button Content="6" HorizontalAlignment="Left" Margin="134,205,0,0" VerticalAlignment="Top" Width="21" Name="Button_6" RenderTransformOrigin="0.827,2.966" Click="Button_6_Click" Height="20"/>
+        <Button Content="7" HorizontalAlignment="Left" Margin="83,180,0,0" VerticalAlignment="Top" Width="20" Name="Button_7" RenderTransformOrigin="-1.122,3.298" Click="Button_7_Click" Height="20"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="108,180,0,0" VerticalAlignment="Top" Width="21" Name="Button_8" Click="Button_8_Click" Height="20"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="134,180,0,0" VerticalAlignment="Top" Width="21" Name="Button_9" Click="Button_9_Click" Height="20"/>
+        <Button Content="0" HorizontalAlignment="Left" Margin="108,255,0,0" VerticalAlignment="Top" Width="21" Name="Button_0" Click="Button_0_Click" Height="20"/>
+        <TextBox HorizontalAlignment="Left" Margin="83,129,0,0" TextWrapping="Wrap" Text="" Width="98" Name="Display_Result" Height="20" VerticalAlignment="Top"/>
+        <Button Content="," HorizontalAlignment="Left" Margin="82,255,0,0" VerticalAlignment="Top" Width="21" Name="Button_Comma" Click="Button_Comma_Click" Height="20"/>
+        <Button Content="=" HorizontalAlignment="Left" Margin="134,255,0,0" VerticalAlignment="Top" Width="21" Name="Button_Equals" Click="Button_Equals_Click" Height="20"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="159,255,0,0" VerticalAlignment="Top" Width="21" Name="Button_Add" Height="20" Click="Button_Add_Click"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="160,230,0,0" VerticalAlignment="Top" Width="21" Name="Button_Subtract" Click="Button_Subtract_Click" Height="20"/>
+        <Button Content="X" HorizontalAlignment="Left" Margin="160,180,0,0" VerticalAlignment="Top" Width="21" Name="Button_Multiply" Click="Button_Multiply_Click" Height="20"/>
+        <Button Content="/" HorizontalAlignment="Left" Margin="160,205,0,0" VerticalAlignment="Top" Width="21" Name="Button_Divide" Click="Button_Divide_Click" Height="20"/>
+        <Button Content="AC" HorizontalAlignment="Left" Margin="83,154,0,0" VerticalAlignment="Top" Width="44" Name="Button_ClearAll" Click="Button_ClearAll_Click" Height="20"/>
 
     </Grid>
 </Window>
