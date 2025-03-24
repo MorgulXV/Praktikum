@@ -22,16 +22,23 @@ namespace ChuckNorrisJokes
 
     public class JokeRetriever
     {
-            public async Task<string> getJoke()
+        public async Task<string> getJoke()
+        {
+            using HttpClient client = new()
             {
-                using HttpClient client = new()
-                {
-                    BaseAddress = new Uri("https://api.chucknorris.io/jokes/random?category=dev")
-                };
-                Joke? joke = await client.GetFromJsonAsync<Joke>("");
+                BaseAddress = new Uri("https://api.chucknorris.io/jokes/random/")
+            };
+            Joke? joke = await client.GetFromJsonAsync<Joke>("");
 
+            if (joke != null)
+            {
                 return joke?.Value;
             }
+            else
+            {
+                return "No joke found";
+            }
+        }
     }
     public partial class MainWindow : Window
     {
