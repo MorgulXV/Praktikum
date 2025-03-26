@@ -17,6 +17,9 @@ using System.Runtime;
 using System.Net.Http;
 using System.Security.Cryptography.Pkcs;
 using System.Web;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 
 namespace LotrAPIWPFApp
@@ -70,7 +73,9 @@ namespace LotrAPIWPFApp
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get, "https://the-one-api.dev/v2/character?name=Th%C3%A9oden");
-            request.Headers.Add("Authorization", "Bearer Ltp7HC2PldSAlsXCyT1O");
+            var token = JObject.Parse(File.ReadAllText("C:\\Users\\TimHeil\\C#\\LotrAPIWPFApp\\secrets.json"))["APIKey"].ToString();
+
+            request.Headers.Add("Authorization", token);
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var tmp = await response.Content.ReadFromJsonAsync<JsonElement>();
