@@ -20,10 +20,17 @@ using System.Web;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Threading.Tasks;
+using LotrAPIWPFProjectApp;
 
 
 namespace LotrAPIWPFApp
 {
+    public abstract class CurrentUrl
+    {
+        public static string currentUrl;
+    }
+    
     public class Root
     {
         [JsonPropertyName("docs")]
@@ -72,7 +79,11 @@ namespace LotrAPIWPFApp
         public async Task<Root> ReceiveData()
         {
             var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://the-one-api.dev/v2/character?name=Elrond");
+            Random rnd = new Random();
+            int page = rnd.Next(1, 933);
+            var Url = "https://the-one-api.dev/v2/character?limit=1&page=";
+            var RandomUrl = Url + page;
+            var request = new HttpRequestMessage(HttpMethod.Get, RandomUrl);
             var token = JObject.Parse(File.ReadAllText("C:\\Users\\TimHeil\\C#\\LotrAPIWPFApp\\secrets.json"))["APIKey"].ToString();
 
             request.Headers.Add("Authorization", token);
@@ -94,29 +105,9 @@ namespace LotrAPIWPFApp
     {
         public MainWindow()
         {
-          InitializeComponent();
+            InitializeComponent();
+            MainFrame.Navigate(new Page1());
         }
-
-        public async void FillData()
-        {
-            var receiver = new Receiver();
-            var Data = await receiver.ReceiveData();
-            NameBox.Text = Data.docs[0].name ?? "N/A";
-            RaceBox.Text = Data.docs[0].race ?? "N/A";
-            BirthBox.Text = Data.docs[0].birth ?? "N/A";
-            GenderBox.Text = Data.docs[0].gender ?? "N/A";
-            DeathBox.Text = Data.docs[0].death ?? "N/A";
-            HairBox.Text = Data.docs[0].hair ?? "N/A";
-            HeightBox.Text = Data.docs[0].height ?? "N/A";
-            RealmBox.Text = Data.docs[0].realm ?? "N/A";
-            SpouseBox.Text = Data.docs[0].spouse ?? "N/A";
-            WikiUrlBox.Text = HttpUtility.UrlDecode(Data.docs[0].wikiUrl) ?? "N/A";
-        }
-
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-            FillData();
-            StartButton.IsEnabled = false;
-        }
+      
     }
 }
