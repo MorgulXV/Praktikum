@@ -40,11 +40,11 @@
         <TextBlock HorizontalAlignment="Left" Margin="254,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.866,1.158"><Run Language="de-de" Text="Realm"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="255,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="de-de" Text="Birth"/></TextBlock>
         <Button HorizontalAlignment="Left" Margin="321,309,0,0" Content="" VerticalAlignment="Top" Width="276" Name="WikiUriBox" Click="WikiUriBox_MouseLeftButtonDown" Background="White" HorizontalContentAlignment="Left"/>
-        <Grid Margin="0,0,684,0" x:Name="Sidebar" Background="LightBlue">
-            <Button BorderThickness="0" Content="Characters" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Background="LightBlue" HorizontalContentAlignment="Left" Margin="1,0,0,0"  x:Name="CharactersButton"/>
-            <Button BorderThickness="0" Content="Quotes" HorizontalAlignment="Left" Margin="1,25,0,0" VerticalAlignment="Top" Width="132" Background="LightBlue" HorizontalContentAlignment="Left" x:Name="QuotesButton"/>
-            <Button BorderThickness="0" Content="Favorites" HorizontalAlignment="Left" Margin="1,50,0,0" VerticalAlignment="Top" Width="132" Background="LightBlue" HorizontalContentAlignment="Left" Name="FavoritesButton"/>
-            <Button BorderThickness="0" Content="Settings" HorizontalAlignment="Left" Margin="1,76,0,0" VerticalAlignment="Top" Width="132" Background="LightBlue" HorizontalContentAlignment="Left" Name="SettingsButton"/>
+        <Grid x:Name="Sidebar" Background="LightBlue" HorizontalAlignment="Left" Width="116">
+            <Button BorderThickness="0" Content="Characters" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left"  x:Name="CharactersButton"/>
+            <Button BorderThickness="0" Content="Quotes" Margin="0,25,0,0" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left" x:Name="QuotesButton" Click="QuotesButton_Click"/>
+            <Button BorderThickness="0" Content="Favorites" Margin="0,50,0,0" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left" Name="FavoritesButton" Click="FavoritesButton_Click"/>
+            <Button BorderThickness="0" Content="Settings" Margin="0,76,0,0" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left" Name="SettingsButton" Click="SettingsButton_Click"/>
         </Grid>
     </Grid>
 </Page>

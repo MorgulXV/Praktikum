@@ -1,0 +1,23 @@
+﻿<Page x:Class="LotrAPIWPFProjectApp.Page4"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  xmlns:local="clr-namespace:LotrAPIWPFProjectApp"
+	  mc:Ignorable="d" 
+	  d:DesignHeight="450" d:DesignWidth="800"
+	  Title="Page4">
+
+    <Grid>
+        <Frame x:Name="MainFrame" HorizontalAlignment="Left" VerticalAlignment="Center" Width="684" Height="450" NavigationUIVisibility="Hidden" Background="White" Margin="116,0,0,0"/>
+        <Grid Margin="0,0,684,0" x:Name="Sidebar" Background="LightBlue">
+            <Button BorderThickness="0" Content="Characters" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left"  x:Name="CharactersButton" Click="CharactersButton_Click"/>
+            <Button BorderThickness="0" Content="Quotes" Margin="0,25,0,0" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left" x:Name="QuotesButton" Click="QuotesButton_Click"/>
+            <Button BorderThickness="0" Content="Favorites" Margin="0,50,0,0" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left" Name="FavoritesButton" Click="FavoritesButton_Click"/>
+            <Button BorderThickness="0" Content="Settings" Margin="0,76,0,0" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left" Name="SettingsButton"/>
+        </Grid>
+        <CheckBox Content="Dark/Light mode" HorizontalAlignment="Left" Margin="373,75,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <TextBox HorizontalAlignment="Left" Margin="373,95,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="ApiKeyBox" TextChanged="ApiKeyBox_TextChanged"/>
+        <Label Content="ApiKey" HorizontalAlignment="Left" Margin="513,89,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
+    </Grid>
+</Page>
