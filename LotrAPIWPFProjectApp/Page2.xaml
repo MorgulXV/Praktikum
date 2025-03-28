@@ -16,12 +16,8 @@
             <Button BorderThickness="0" Content="Favorites" Margin="0,50,0,0" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left" Name="FavoritesButton" Click="FavoritesButton_Click"/>
             <Button BorderThickness="0" Content="Settings" Margin="0,76,0,0" VerticalAlignment="Top" Background="LightBlue" HorizontalContentAlignment="Left" Name="SettingsButton" Click="SettingsButton_Click"/>
         </Grid>
-        <TextBox Margin="350,70,234,0" TextWrapping="Wrap" Text="" IsReadOnly="True" Name="QuoteBox1" Height="84" VerticalAlignment="Top"/>
-        <TextBox TextWrapping="Wrap" Text="" Margin="351,175,233,0" IsReadOnly="True" Name="QuoteBox2" Height="84" VerticalAlignment="Top"/>
-        <TextBox Margin="352,280,232,0" TextWrapping="Wrap" Text="" IsReadOnly="True" Name="QuoteBox3" Height="84" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="352,154,0,0" TextWrapping="Wrap" Text="Quote from:" VerticalAlignment="Top" Width="215" Name="QuotedFromBox1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="352,259,0,0" TextWrapping="Wrap" Text="Quote from:" VerticalAlignment="Top" Width="215" Name="QuotedFromBox2"/>
-        <TextBlock HorizontalAlignment="Left" Margin="353,364,0,0" TextWrapping="Wrap" Text="Quote from:" VerticalAlignment="Top" Width="215" Name="QuotedFromBox3"/>
-        <Button Content="Get 3 random quotes" HorizontalAlignment="Left" Margin="400,34,0,0" VerticalAlignment="Top" Click="Button_Click" Name="RandomQuoteButton"/>
+        <TextBox Margin="349,90,235,0" TextWrapping="Wrap" Text="" IsReadOnly="True" Name="QuoteBox1" Height="282" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="350,377,0,0" TextWrapping="Wrap" Text="Quote from:" VerticalAlignment="Top" Width="215" Name="QuotedFromBox1"/>
+        <Button Content="Get a random quote" HorizontalAlignment="Left" Margin="400,34,0,0" VerticalAlignment="Top" Click="Button_Click" Name="RandomQuoteButton"/>
     </Grid>
 </Page>

@@ -88,7 +88,7 @@ namespace LotrAPIWPFProjectApp
             var client = new HttpClient();
             Random rnd = new Random();
             int page = rnd.Next(1, 2384);
-            var Url = "https://the-one-api.dev/v2/quote?limit=3&page=";
+            var Url = "https://the-one-api.dev/v2/quote?limit=1&page=";
             var RandomUrl = Url + page;
             var request = new HttpRequestMessage(HttpMethod.Get, RandomUrl);
             var token = JObject.Parse(File.ReadAllText("C:\\Users\\TimHeil\\C#\\LotrAPIWPFApp\\secrets.json"))["APIKey"].ToString();
@@ -127,17 +127,6 @@ namespace LotrAPIWPFProjectApp
             {
                 QuoteBox1.Text = Data.docs[0].dialog ?? "N/A";
                 QuotedFromBox1.Text = "Quote by: " + await characterReceiver.NameReceiver(Data.docs[0].character) ?? "N/A";
-            }
-            if (Data.docs.Length > 1)
-            {
-                QuoteBox2.Text = Data.docs[1].dialog ?? "N/A";
-                QuotedFromBox2.Text = "Quote by: " + await characterReceiver.NameReceiver(Data.docs[1].character) ?? "N/A";
-            }
-            
-            if (Data.docs.Length > 2)
-            {
-                QuoteBox3.Text = Data.docs[2].dialog ?? "N/A";
-                QuotedFromBox3.Text = "Quote by: " + await characterReceiver.NameReceiver(Data.docs[2].character) ?? "N/A";
             }
             
         }

@@ -10,15 +10,8 @@
 
     <Grid>
         <Frame x:Name="MainFrame" HorizontalAlignment="Left" VerticalAlignment="Top" Width="800" Height="450" NavigationUIVisibility="Hidden" Background="White"/>
-        <TextBox HorizontalAlignment="Left" Margin="321,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" Name="BirthBox" IsReadOnly="True" RenderTransformOrigin="0.5,0.5">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.016"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
+        <TextBox HorizontalAlignment="Left" Margin="321,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="276" Name="BirthBox" IsReadOnly="True" RenderTransformOrigin="0.5,0.5">
+           
         </TextBox>
         <TextBox HorizontalAlignment="Left" Margin="321,216,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="276" Name="GenderBox" IsReadOnly="True"/>
         <TextBox HorizontalAlignment="Left" Margin="321,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="276" Name="RaceBox" IsReadOnly="True"/>

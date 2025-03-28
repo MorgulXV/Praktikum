@@ -21,7 +21,8 @@ namespace LotrAPIWPFProjectApp
         {
             var policy = new CacheItemPolicy
             {
-                AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(expirationMinutes)
+                AbsoluteExpiration = ObjectCache.InfiniteAbsoluteExpiration,
+                SlidingExpiration = ObjectCache.NoSlidingExpiration
             };
             cache.Set(key, data, policy);
         }
