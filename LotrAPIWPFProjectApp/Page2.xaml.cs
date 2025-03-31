@@ -1,28 +1,16 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.XPath;
 
 namespace LotrAPIWPFProjectApp
 {
-    public abstract class CurrentQuoteUrl
+    public class CurrentQuoteUrl
     {
         public static string currentUrl;
     }
@@ -30,7 +18,7 @@ namespace LotrAPIWPFProjectApp
     public class QuoteRoot
     {
         [JsonPropertyName("docs")]
-        public QuoteDocs[] docs { get; set; }
+        public required QuoteDocs[] docs { get; set; }
         [JsonPropertyName("total")]
         public int total { get; set; }
         [JsonPropertyName("limit")]
@@ -54,29 +42,30 @@ namespace LotrAPIWPFProjectApp
         [JsonPropertyName("character")]
         public string? character { get; set; }
     }
-    
+
     public class CharacterNameReceiver
-    {
+    {   
+
         public async Task<string> NameReceiver(string id)
         {
-            var client = new HttpClient();
-            var Url = "https://the-one-api.dev/v2/character/";
-            var CharacterUrl = Url + id;
+            HttpClient client = new();
+            string Url = "https://the-one-api.dev/v2/character/";
+            string CharacterUrl = Url + id;
 
-            var request = new HttpRequestMessage(HttpMethod.Get, CharacterUrl);
-            var token = JObject.Parse(File.ReadAllText("C:\\Users\\TimHeil\\C#\\LotrAPIWPFApp\\secrets.json"))["APIKey"].ToString();
+            HttpRequestMessage request = new(HttpMethod.Get, CharacterUrl);
+            string token = JObject.Parse(File.ReadAllText("C:\\Users\\TimHeil\\C#\\LotrAPIWPFApp\\secrets.json"))["APIKey"].ToString();
 
             request.Headers.Add("Authorization", token);
-            var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var tmp = await response.Content.ReadFromJsonAsync<JsonElement>();
+            HttpResponseMessage response = await client.SendAsync(request);
+            _ = response.EnsureSuccessStatusCode();
+            JsonElement tmp = await response.Content.ReadFromJsonAsync<JsonElement>();
 
-            var options = new JsonSerializerOptions
+            JsonSerializerOptions options = new()
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            var MyObject = JsonSerializer.Deserialize<CharacterRoot>(tmp.GetRawText(), options);
+            CharacterRoot? MyObject = JsonSerializer.Deserialize<CharacterRoot>(tmp.GetRawText(), options);
             return MyObject.docs[0].name;
         }
     }
@@ -85,26 +74,26 @@ namespace LotrAPIWPFProjectApp
     {
         public async Task<QuoteRoot> ReceiveData()
         {
-            var client = new HttpClient();
-            Random rnd = new Random();
+            HttpClient client = new();
+            Random rnd = new();
             int page = rnd.Next(1, 2384);
-            var Url = "https://the-one-api.dev/v2/quote?limit=1&page=";
-            var RandomUrl = Url + page;
-            var request = new HttpRequestMessage(HttpMethod.Get, RandomUrl);
-            var token = JObject.Parse(File.ReadAllText("C:\\Users\\TimHeil\\C#\\LotrAPIWPFApp\\secrets.json"))["APIKey"].ToString();
+            string Url = "https://the-one-api.dev/v2/quote?limit=1&page=";
+            string RandomUrl = Url + page;
+            HttpRequestMessage request = new(HttpMethod.Get, RandomUrl);
+            string token = JObject.Parse(File.ReadAllText("C:\\Users\\TimHeil\\C#\\LotrAPIWPFApp\\secrets.json"))["APIKey"].ToString();
 
             request.Headers.Add("Authorization", token);
-            var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var tmp = await response.Content.ReadFromJsonAsync<JsonElement>();
+            HttpResponseMessage response = await client.SendAsync(request);
+            _ = response.EnsureSuccessStatusCode();
+            JsonElement tmp = await response.Content.ReadFromJsonAsync<JsonElement>();
             Console.WriteLine(tmp);
 
-            var options = new JsonSerializerOptions
+            JsonSerializerOptions options = new()
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            var MyObject = JsonSerializer.Deserialize<QuoteRoot>(tmp.GetRawText(), options);
+            QuoteRoot? MyObject = JsonSerializer.Deserialize<QuoteRoot>(tmp.GetRawText(), options);
             return MyObject;
         }
     }
@@ -119,31 +108,31 @@ namespace LotrAPIWPFProjectApp
 
         public async Task FillQuoteData()
         {
-            var receiver = new QuoteDataReceiver();
-            var Data = await receiver.ReceiveData();
-            var characterReceiver = new CharacterNameReceiver();
+            QuoteDataReceiver receiver = new();
+            QuoteRoot Data = await receiver.ReceiveData();
+            CharacterNameReceiver characterReceiver = new();
 
             if (Data.docs.Length > 0)
             {
                 QuoteBox1.Text = Data.docs[0].dialog ?? "N/A";
                 QuotedFromBox1.Text = "Quote by: " + await characterReceiver.NameReceiver(Data.docs[0].character) ?? "N/A";
             }
-            
+
         }
 
         private void CharactersButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("Page1.xaml", UriKind.Relative));
+            _ = NavigationService.Navigate(new Uri("Page1.xaml", UriKind.Relative));
         }
 
         private void FavoritesButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("Page3.xaml", UriKind.Relative));
+            _ = NavigationService.Navigate(new Uri("Page3.xaml", UriKind.Relative));
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("Page4.xaml", UriKind.Relative));
+            _ = NavigationService.Navigate(new Uri("Page4.xaml", UriKind.Relative));
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
