@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using LotrAPIWPFApp;
+using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -10,11 +11,6 @@ using System.Windows.Navigation;
 
 namespace LotrAPIWPFProjectApp
 {
-    public class CurrentQuoteUrl
-    {
-        public static string currentUrl;
-    }
-
     public class QuoteRoot
     {
         [JsonPropertyName("docs")]

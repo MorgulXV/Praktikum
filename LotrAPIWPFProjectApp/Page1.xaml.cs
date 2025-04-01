@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using LotrAPIWPFApp;
+using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -13,23 +14,6 @@ using System.Windows.Navigation;
 
 namespace LotrAPIWPFProjectApp
 {
-    public class CharacterCache
-    {
-        public static MemoryCache cache = new("CharacterCache");
-        public static void Set(string key, object data, int expirationMinutes)
-        {
-            CacheItemPolicy policy = new()
-            {
-                AbsoluteExpiration = ObjectCache.InfiniteAbsoluteExpiration,
-                SlidingExpiration = ObjectCache.NoSlidingExpiration
-            };
-            cache.Set(key, data, policy);
-        }
-        public static object Get(string key)
-        {
-            return cache.Get(key);
-        }
-    }
 
     public class CharacterRoot
     {
@@ -74,53 +58,26 @@ namespace LotrAPIWPFProjectApp
 
     }
 
-    internal class CharacterDataReceiver
-    {
-        public async Task<CharacterRoot> ReceiveData()
-        {
-            HttpClient client = new();
-            Random rnd = new();
-            int page = rnd.Next(1, 933);
-            string Url = "https://the-one-api.dev/v2/character?limit=1&page=";
-            string RandomUrl = Url + page;
-            HttpRequestMessage request = new(HttpMethod.Get, RandomUrl);
-            string token = JObject.Parse(File.ReadAllText("C:\\Users\\TimHeil\\C#\\LotrAPIWPFApp\\secrets.json"))["APIKey"].ToString();
-
-            request.Headers.Add("Authorization", token);
-            HttpResponseMessage response = await client.SendAsync(request);
-            _ = response.EnsureSuccessStatusCode();
-            JsonElement tmp = await response.Content.ReadFromJsonAsync<JsonElement>();
-            Console.WriteLine(tmp);
-
-            JsonSerializerOptions options = new()
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
-            CharacterRoot? MyObject = JsonSerializer.Deserialize<CharacterRoot>(tmp.GetRawText(), options);
-            return MyObject;
-        }
-    }
     public partial class Page1 : Page
-    {
+    {   
         public Page1()
         {
             InitializeComponent();
         }
         public async Task FillCharacterData()
         {
-            CharacterDataReceiver receiver = new();
-            CharacterRoot Data = await receiver.ReceiveData();
-            NameBox.Text = Data.docs[0].name ?? "N/A";
-            RaceBox.Text = Data.docs[0].race ?? "N/A";
-            BirthBox.Text = Data.docs[0].birth ?? "N/A";
-            GenderBox.Text = Data.docs[0].gender ?? "N/A";
-            DeathBox.Text = Data.docs[0].death ?? "N/A";
-            HairBox.Text = Data.docs[0].hair ?? "N/A";
-            HeightBox.Text = Data.docs[0].height ?? "N/A";
-            RealmBox.Text = Data.docs[0].realm ?? "N/A";
-            SpouseBox.Text = Data.docs[0].spouse ?? "N/A";
-            WikiUriBox.Content = HttpUtility.UrlDecode(Data.docs[0].wikiUrl ?? "N/A");
+            Random rnd = new();
+            int index = rnd.Next(0, CharacterCache.characterCache.Count-1);
+            NameBox.Text = CharacterCache.characterCache[index].name ?? "N/A";
+            RaceBox.Text = CharacterCache.characterCache[index].race ?? "N/A";
+            BirthBox.Text = CharacterCache.characterCache[index].birth ?? "N/A";
+            GenderBox.Text = CharacterCache.characterCache[index].gender ?? "N/A";
+            DeathBox.Text = CharacterCache.characterCache[index].death ?? "N/A";
+            HairBox.Text = CharacterCache.characterCache[index].hair ?? "N/A";
+            HeightBox.Text = CharacterCache.characterCache[index].height ?? "N/A";
+            RealmBox.Text = CharacterCache.characterCache[index].realm ?? "N/A";
+            SpouseBox.Text = CharacterCache.characterCache[index].spouse ?? "N/A";
+            WikiUriBox.Content = HttpUtility.UrlDecode(CharacterCache.characterCache[index].wikiUrl ?? "N/A");
         }
 
         private async void StartButton_Click(object sender, RoutedEventArgs e)
