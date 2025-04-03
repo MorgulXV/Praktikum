@@ -35,12 +35,11 @@ namespace NUnitTest
             }
 
             [Test]
-            public void Test1()
+            public void GnomeSortTest()
             {
-                
                 GFG gfg = new GFG();
                 gfg.gnomeSort(gfg.unsortedArray, unsortedArray.Length);
-                Assert.That(sortedArray, Is.EqualTo(unsortedArray));
+                Assert.That(sortedArray, Is.EqualTo(unsortedArray), "Gnome sort isn't implemented in a correct way");
             }
         }
     }

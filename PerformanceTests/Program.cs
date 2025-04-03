@@ -7,7 +7,6 @@ namespace MyApplication
     class SortingAlgorithms
     {
         public int[] _unsortedArr;
-        public int[] _sortedArr;
 
         public SortingAlgorithms()
         {
@@ -158,60 +157,59 @@ namespace MyApplication
     {
         public static void Main(string[] args)
         {
-            Stopwatch sw = new Stopwatch();
+            const int iterations = 100;
+            const int arraySize = 10000;
             SortingAlgorithms sortingAlgorithms = new SortingAlgorithms();
-            sw.Start();
-            sortingAlgorithms.BubbleSort(sortingAlgorithms._unsortedArr);
-            sw.Stop();
-            TimeSpan ts = sw.Elapsed;
+            Stopwatch sw = new Stopwatch();
+            TimeSpan totalBubbleSortTime = TimeSpan.Zero;
+            TimeSpan totalSelectionSortTime = TimeSpan.Zero;
+            TimeSpan totalQuickSortTime = TimeSpan.Zero;
+            TimeSpan minBubbleSortTime = TimeSpan.MaxValue;
+            TimeSpan minSelectionSortTime = TimeSpan.MaxValue;
+            TimeSpan minQuickSortTime = TimeSpan.MaxValue;
+            TimeSpan maxBubbleSortTime = TimeSpan.Zero;
+            TimeSpan maxSelectionSortTime = TimeSpan.Zero;
+            TimeSpan maxQuickSortTime = TimeSpan.Zero;
 
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            ts.Hours, ts.Minutes, ts.Seconds,
-            ts.Milliseconds / 10);
+            for (int i = 0; i < iterations; i++)
+            {
+                sortingAlgorithms.AddRandomElements(arraySize);
 
-            Console.WriteLine($"Bubble sort: {elapsedTime}");
+                sw.Start();
+                sortingAlgorithms.BubbleSort((int[])sortingAlgorithms._unsortedArr.Clone());
+                sw.Stop();
+                TimeSpan ts = sw.Elapsed;
+                totalBubbleSortTime += ts;
+                if (ts < minBubbleSortTime) minBubbleSortTime = ts;
+                if (ts > maxBubbleSortTime) maxBubbleSortTime = ts;
+                sw.Reset();
 
-            sw.Reset();
+                sortingAlgorithms.AddRandomElements(arraySize);
 
-            sortingAlgorithms.AddRandomElements(10000);
-            sw.Start();
-            sortingAlgorithms.SelectionSort(sortingAlgorithms._unsortedArr);
-            sw.Stop();
+                sw.Start();
+                sortingAlgorithms.SelectionSort((int[])sortingAlgorithms._unsortedArr.Clone());
+                sw.Stop();
+                ts = sw.Elapsed;
+                totalSelectionSortTime += ts;
+                if (ts < minSelectionSortTime) minSelectionSortTime = ts;
+                if (ts > maxSelectionSortTime) maxSelectionSortTime = ts;
+                sw.Reset();
 
-            ts = sw.Elapsed;
-            elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            ts.Hours, ts.Minutes, ts.Seconds,
-            ts.Milliseconds / 10);
+                sortingAlgorithms.AddRandomElements(arraySize);
 
-            Console.WriteLine($"Selection sort: {elapsedTime}");
+                sw.Start();
+                sortingAlgorithms.QuickSort((int[])sortingAlgorithms._unsortedArr.Clone(), 0, sortingAlgorithms._unsortedArr.Length - 1);
+                sw.Stop();
+                ts = sw.Elapsed;
+                totalQuickSortTime += ts;
+                if (ts < minQuickSortTime) minQuickSortTime = ts;
+                if (ts > maxQuickSortTime) maxQuickSortTime = ts;
+                sw.Reset();
+            }
 
-            sw.Reset();
-
-            sortingAlgorithms.AddRandomElements(10000);
-
-            sw.Start();
-            sortingAlgorithms.QuickSort(sortingAlgorithms._unsortedArr, 0, sortingAlgorithms._unsortedArr.Length-1);
-            sw.Stop();
-
-            ts = sw.Elapsed;
-            elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            ts.Hours, ts.Minutes, ts.Seconds,
-            ts.Milliseconds / 10);
-
-            Console.WriteLine($"Quick sort: {elapsedTime}");
-            sw.Reset();
-
-            sortingAlgorithms.AddRandomElements(15);
-            sw.Start();
-            SortingAlgorithms.bogosort(sortingAlgorithms._unsortedArr, sortingAlgorithms._unsortedArr.Length-1);
-            sw.Stop();
-            ts = sw.Elapsed;
-            elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            ts.Hours, ts.Minutes, ts.Seconds,
-            ts.Milliseconds / 10);
-
-            Console.WriteLine($"Bogo sort: {elapsedTime}");
-            sw.Reset();
+            Console.WriteLine($"Bubble sort - Avg: {totalBubbleSortTime.TotalMilliseconds / iterations} ms, Min: {minBubbleSortTime.TotalMilliseconds} ms, Max: {maxBubbleSortTime.TotalMilliseconds} ms");
+            Console.WriteLine($"Selection sort - Avg: {totalSelectionSortTime.TotalMilliseconds / iterations} ms, Min: {minSelectionSortTime.TotalMilliseconds} ms, Max: {maxSelectionSortTime.TotalMilliseconds} ms");
+            Console.WriteLine($"Quick sort - Avg: {totalQuickSortTime.TotalMilliseconds / iterations} ms, Min: {minQuickSortTime.TotalMilliseconds} ms, Max: {maxQuickSortTime.TotalMilliseconds} ms");
         }
     }
 }
