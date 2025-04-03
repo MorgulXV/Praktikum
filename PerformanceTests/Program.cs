@@ -170,7 +170,7 @@ namespace MyApplication
             TimeSpan maxBubbleSortTime = TimeSpan.Zero;
             TimeSpan maxSelectionSortTime = TimeSpan.Zero;
             TimeSpan maxQuickSortTime = TimeSpan.Zero;
-
+            
             for (int i = 0; i < iterations; i++)
             {
                 sortingAlgorithms.AddRandomElements(arraySize);
